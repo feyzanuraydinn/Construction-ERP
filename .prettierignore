@@ -1,0 +1,6 @@
+build
+dist
+dist-electron
+node_modules
+*.md
+package-lock.json
