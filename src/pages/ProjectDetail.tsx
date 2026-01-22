@@ -541,27 +541,66 @@ function ProjectDetail() {
           <Card>
             {/* Tab Navigation */}
             <div className="border-b border-gray-100">
-              <div className="flex">
-                <button
-                  onClick={() => setActiveTab('transactions')}
-                  className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
-                    activeTab === 'transactions'
-                      ? 'border-blue-600 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  İşlemler
-                </button>
-                <button
-                  onClick={() => setActiveTab('parties')}
-                  className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
-                    activeTab === 'parties'
-                      ? 'border-blue-600 text-blue-600'
-                      : 'border-transparent text-gray-500 hover:text-gray-700'
-                  }`}
-                >
-                  Paydaşlar
-                </button>
+              <div className="flex items-center justify-between px-4 min-h-[56px]">
+                <div className="flex items-center">
+                  <button
+                    onClick={() => setActiveTab('transactions')}
+                    className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
+                      activeTab === 'transactions'
+                        ? 'border-blue-600 text-blue-600'
+                        : 'border-transparent text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    İşlemler
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('parties')}
+                    className={`px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
+                      activeTab === 'parties'
+                        ? 'border-blue-600 text-blue-600'
+                        : 'border-transparent text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    Paydaşlar
+                  </button>
+                  {activeTab === 'transactions' && selectedIds.size > 0 && (
+                    <div className="flex items-center gap-2 ml-3">
+                      <div className="w-px h-6 bg-gray-300" />
+                      <button
+                        onClick={() => setBulkDeleteConfirm(true)}
+                        className="flex items-center gap-2 text-red-600 bg-red-50 hover:bg-red-100 btn"
+                      >
+                        <FiTrash2 size={16} />
+                        {selectedIds.size} işlem sil
+                      </button>
+                    </div>
+                  )}
+                </div>
+                {activeTab === 'transactions' && (
+                  <div className="flex items-center gap-2">
+                    <Select
+                      options={TRANSACTION_TYPES}
+                      value={filterType}
+                      onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        setFilterType(e.target.value)
+                      }
+                      placeholder="Tüm Türler"
+                      className="w-36"
+                    />
+                    <Select
+                      options={stakeholders.map((s) => ({
+                        value: s.company_id,
+                        label: s.company_name,
+                      }))}
+                      value={filterCompanyId}
+                      onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                        setFilterCompanyId(e.target.value)
+                      }
+                      placeholder="Tüm Cariler"
+                      className="w-44"
+                    />
+                  </div>
+                )}
               </div>
             </div>
 
@@ -569,40 +608,6 @@ function ProjectDetail() {
             <CardBody className="p-0">
               {activeTab === 'transactions' && (
                 <>
-                  <div className="flex items-center justify-between gap-3 p-4 border-b border-gray-100">
-                    <div className="flex items-center gap-3">
-                      <Select
-                        options={TRANSACTION_TYPES}
-                        value={filterType}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                          setFilterType(e.target.value)
-                        }
-                        placeholder="Tüm Türler"
-                        className="w-36"
-                      />
-                      <Select
-                        options={stakeholders.map((s) => ({
-                          value: s.company_id,
-                          label: s.company_name,
-                        }))}
-                        value={filterCompanyId}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                          setFilterCompanyId(e.target.value)
-                        }
-                        placeholder="Tüm Cariler"
-                        className="w-44"
-                      />
-                    </div>
-                    {selectedIds.size > 0 && (
-                      <button
-                        onClick={() => setBulkDeleteConfirm(true)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"
-                      >
-                        <FiTrash2 size={14} />
-                        {selectedIds.size} işlem sil
-                      </button>
-                    )}
-                  </div>
                   {filteredTransactions.length === 0 ? (
                     <EmptyState title="İşlem bulunamadı" />
                   ) : (

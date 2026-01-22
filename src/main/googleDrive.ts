@@ -254,6 +254,17 @@ class GoogleDriveService {
         }
       });
 
+      server.on('error', (err: NodeJS.ErrnoException) => {
+        if (err.code === 'EADDRINUSE') {
+          resolve({
+            success: false,
+            error: `Port ${REDIRECT_PORT} zaten kullanımda. Lütfen uygulamayı yeniden başlatın veya açık olan diğer uygulama pencerelerini kapatın.`,
+          });
+        } else {
+          resolve({ success: false, error: `Sunucu hatası: ${err.message}` });
+        }
+      });
+
       server.listen(REDIRECT_PORT, () => {
         // Open browser for authentication
         shell.openExternal(authUrl);

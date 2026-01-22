@@ -242,16 +242,12 @@ function Projects() {
         <div className="flex items-center gap-2">
           {selectedIds.size > 0 && (
             <>
-              <span className="text-sm text-gray-600">{selectedIds.size} kayıt seçildi</span>
               <button
                 onClick={() => setBulkDeleteConfirm(true)}
-                className="flex items-center gap-2 btn btn-danger"
+                className="flex items-center gap-2 text-red-600 bg-red-50 hover:bg-red-100 btn"
               >
                 <FiTrash2 size={16} />
-                Seçilenleri Sil
-              </button>
-              <button onClick={clearSelection} className="btn btn-secondary">
-                Seçimi Temizle
+                {selectedIds.size} proje sil
               </button>
               <div className="w-px h-6 bg-gray-300" />
             </>

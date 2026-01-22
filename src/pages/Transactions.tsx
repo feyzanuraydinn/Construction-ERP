@@ -380,29 +380,32 @@ function Transactions() {
     <div className="page-container">
       {/* Header */}
       <div className="page-header">
-        <div className="flex items-center gap-4">
-          <div>
-            <h1 className="page-title">Tüm İşlemler</h1>
-            <p className="mt-1 text-sm text-gray-500">Sistemdeki tüm işlem hareketleri</p>
-          </div>
-          {selectedIds.size > 0 && (
-            <button
-              onClick={() => setBulkDeleteConfirm(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"
-            >
-              <FiTrash2 size={14} />
-              {selectedIds.size} işlem sil
-            </button>
-          )}
+        <div>
+          <h1 className="page-title">Tüm İşlemler</h1>
+          <p className="mt-1 text-sm text-gray-500">Sistemdeki tüm işlem hareketleri</p>
         </div>
-        <button
-          onClick={handleExport}
-          className="flex items-center gap-2 btn btn-secondary"
-          title="Excel'e Aktar"
-        >
-          <FiDownload size={16} />
-          Dışa Aktar
-        </button>
+        <div className="flex items-center gap-2">
+          {selectedIds.size > 0 && (
+            <>
+              <button
+                onClick={() => setBulkDeleteConfirm(true)}
+                className="flex items-center gap-2 text-red-600 bg-red-50 hover:bg-red-100 btn"
+              >
+                <FiTrash2 size={16} />
+                {selectedIds.size} işlem sil
+              </button>
+              <div className="w-px h-6 bg-gray-300" />
+            </>
+          )}
+          <button
+            onClick={handleExport}
+            className="flex items-center gap-2 btn btn-secondary"
+            title="Excel'e Aktar"
+          >
+            <FiDownload size={16} />
+            Dışa Aktar
+          </button>
+        </div>
       </div>
 
       {/* Stats - Satır 1: Faturalar ve Ödemeler */}

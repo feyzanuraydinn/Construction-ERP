@@ -319,42 +319,24 @@ function Stock() {
         <div className="flex items-center gap-2">
           {activeTab === 'materials' && selectedMaterialIds.size > 0 && (
             <>
-              <span className="text-sm text-gray-600">
-                {selectedMaterialIds.size} kayıt seçildi
-              </span>
               <button
                 onClick={() => setBulkDeleteMaterialConfirm(true)}
-                className="flex items-center gap-2 btn btn-danger"
+                className="flex items-center gap-2 text-red-600 bg-red-50 hover:bg-red-100 btn"
               >
                 <FiTrash2 size={16} />
-                Seçilenleri Sil
-              </button>
-              <button
-                onClick={() => setSelectedMaterialIds(new Set())}
-                className="btn btn-secondary"
-              >
-                Seçimi Temizle
+                {selectedMaterialIds.size} malzeme sil
               </button>
               <div className="w-px h-6 bg-gray-300" />
             </>
           )}
           {activeTab === 'movements' && selectedMovementIds.size > 0 && (
             <>
-              <span className="text-sm text-gray-600">
-                {selectedMovementIds.size} kayıt seçildi
-              </span>
               <button
                 onClick={() => setBulkDeleteMovementConfirm(true)}
-                className="flex items-center gap-2 btn btn-danger"
+                className="flex items-center gap-2 text-red-600 bg-red-50 hover:bg-red-100 btn"
               >
                 <FiTrash2 size={16} />
-                Seçilenleri Sil
-              </button>
-              <button
-                onClick={() => setSelectedMovementIds(new Set())}
-                className="btn btn-secondary"
-              >
-                Seçimi Temizle
+                {selectedMovementIds.size} hareket sil
               </button>
               <div className="w-px h-6 bg-gray-300" />
             </>

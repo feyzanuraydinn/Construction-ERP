@@ -370,17 +370,20 @@ function CompanyAccount() {
         {/* Right - Transactions */}
         <div className="lg:col-span-3">
           <Card>
-            <CardHeader className="flex items-center justify-between">
+            <CardHeader className="flex items-center justify-between h-16">
               <div className="flex items-center gap-3">
                 <h3 className="font-semibold">İşlemler</h3>
                 {selectedIds.size > 0 && (
-                  <button
-                    onClick={() => setBulkDeleteConfirm(true)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"
-                  >
-                    <FiTrash2 size={14} />
-                    {selectedIds.size} işlem sil
-                  </button>
+                  <>
+                    <div className="w-px h-6 bg-gray-300" />
+                    <button
+                      onClick={() => setBulkDeleteConfirm(true)}
+                      className="flex items-center gap-2 text-red-600 bg-red-50 hover:bg-red-100 btn"
+                    >
+                      <FiTrash2 size={16} />
+                      {selectedIds.size} işlem sil
+                    </button>
+                  </>
                 )}
               </div>
               <div className="flex gap-2">

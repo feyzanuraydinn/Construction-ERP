@@ -469,7 +469,7 @@ function Settings() {
               </div>
             )}
           </CardHeader>
-          <CardBody className="p-0 h-[160px]">
+          <CardBody className={`p-0 ${showCredentialsForm ? 'h-auto' : 'h-[160px]'}`}>
             {/* Loading State */}
             {initialLoading && (
               <div className="flex items-center justify-center h-full">
@@ -479,10 +479,13 @@ function Settings() {
 
             {/* Credentials Form */}
             {!initialLoading && showCredentialsForm && (
-              <div className="p-4 border-b border-gray-100 bg-gray-50">
+              <div className="p-4 bg-gray-50">
                 <p className="mb-3 text-xs text-gray-500">
-                  Google Cloud Console'dan OAuth 2.0 credentials oluşturun. Redirect URI:{' '}
-                  <code className="px-1 py-0.5 bg-gray-200 rounded">
+                  Google Cloud Console'dan OAuth 2.0 credentials oluşturun.
+                </p>
+                <p className="mb-3 text-xs text-gray-500">
+                  Redirect URI:{' '}
+                  <code className="px-1 py-0.5 bg-gray-200 rounded text-[10px] break-all">
                     http://localhost:8089/oauth2callback
                   </code>
                 </p>
@@ -504,9 +507,18 @@ function Settings() {
                     }
                     placeholder="GOCSPX-..."
                   />
-                  <Button size="sm" onClick={handleSaveCredentials} loading={driveLoading}>
-                    Kaydet
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button size="sm" onClick={handleSaveCredentials} loading={driveLoading}>
+                      Kaydet
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => setShowCredentialsForm(false)}
+                    >
+                      İptal
+                    </Button>
+                  </div>
                 </div>
               </div>
             )}
